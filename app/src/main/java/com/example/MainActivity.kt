@@ -158,7 +158,11 @@ class MainActivity : ComponentActivity() {
                                     mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
                                     useWideViewPort = true
                                     loadWithOverviewMode = true
+                                    cacheMode = WebSettings.LOAD_NO_CACHE
                                 }
+
+                                // Vider le cache de l'application à chaque démarrage pour forcer la prise en compte des nouveaux assets
+                                clearCache(true)
 
                                 // Charger le fichier index de l'application IPTV placé en assets
                                 loadUrl("file:///android_asset/index.html")

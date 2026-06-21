@@ -82,6 +82,28 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 // Enregistrement du Service Worker
 function registerServiceWorker() {
+    // Si on est dans un environnement local (WebView Android via file://),
+    // on désactive le Service Worker et nettoie les anciens caches pour permettre
+    // le chargement immédiat des fichiers mis à jour dans l'application compilée.
+    if (window.location.protocol === 'file:') {
+        console.log('Exécution en local (WebView Android) : Désactivation du Service Worker.');
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.getRegistrations().then(registrations => {
+                for (let registration of registrations) {
+                    registration.unregister();
+                }
+            });
+        }
+        if ('caches' in window) {
+            caches.keys().then(names => {
+                for (let name of names) {
+                    caches.delete(name);
+                }
+            });
+        }
+        return;
+    }
+
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('./sw.js')
             .then(reg => console.log('Service Worker enregistré avec succès ! Portée :', reg.scope))
