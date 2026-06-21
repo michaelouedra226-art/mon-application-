@@ -1,0 +1,6 @@
+{
+  "name": "Mon IPTV Pro",
+  "description": "Lecteur multimédia IPTV professionnel, fluide et hors-ligne.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
